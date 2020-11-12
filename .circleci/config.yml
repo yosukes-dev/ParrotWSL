@@ -1,0 +1,10 @@
+jobs:
+ build:
+   machine: true
+   steps:
+     - checkout
+     # build
+     - run: make all
+
+     # cleanup
+     - run: make clean
