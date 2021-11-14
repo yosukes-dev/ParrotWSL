@@ -3,7 +3,7 @@ LNCR_EXE=Parrot.exe
 
 DLR=curl
 DLR_FLAGS=-L
-LNCR_URL=https://github.com/yuk7/wsldl/releases/download/20100500/Launcher.exe
+LNCR_URL=https://github.com/yuk7/wsldl/releases/download/21082800/wsldl.exe
 
 all: $(OUT_ZIP)
 
@@ -37,7 +37,7 @@ rootfs: base.tar
 
 base.tar:
 	@echo -e '\e[1;31mExporting base.tar using docker...\e[m'
-	docker run --name parrotwsl parrotsec/core:latest /bin/bash -c "pwconv; grpconv; chmod 0744 /etc/shadow; chmod 0744 /etc/gshadow;"
+	docker run --name parrotwsl parrotsec/core@sha256:cdc3a1710c030680a486100a9b0ae11d8c4aab3e7e626c7a9e17c01b823d5e9f /bin/bash -c "pwconv; grpconv; chmod 0744 /etc/shadow; chmod 0744 /etc/gshadow;"
 	docker export --output=base.tar parrotwsl
 	docker rm -f parrotwsl
 
@@ -49,4 +49,4 @@ clean:
 	-rm rootfs.tar.gz
 	-sudo rm -r rootfs
 	-rm base.tar
-	-docker rmi parrotsec/core:latest
+	-docker rmi parrotsec/core@sha256:cdc3a1710c030680a486100a9b0ae11d8c4aab3e7e626c7a9e17c01b823d5e9f
